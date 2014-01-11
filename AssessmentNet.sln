@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssessmentNet", "AssessmentNet\AssessmentNet.csproj", "{380D7C7C-18B3-4D8A-8471-3FA6EF0BF716}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssessmentNet.Tests", "AssessmentNet.Tests\AssessmentNet.Tests.csproj", "{05BEEC8E-200E-4ED3-863A-A78D6426A280}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{380D7C7C-18B3-4D8A-8471-3FA6EF0BF716}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{380D7C7C-18B3-4D8A-8471-3FA6EF0BF716}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{380D7C7C-18B3-4D8A-8471-3FA6EF0BF716}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{380D7C7C-18B3-4D8A-8471-3FA6EF0BF716}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05BEEC8E-200E-4ED3-863A-A78D6426A280}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05BEEC8E-200E-4ED3-863A-A78D6426A280}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05BEEC8E-200E-4ED3-863A-A78D6426A280}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05BEEC8E-200E-4ED3-863A-A78D6426A280}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
