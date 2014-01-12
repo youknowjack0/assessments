@@ -1,4 +1,4 @@
-﻿namespace AssessmentNet.Models
+﻿namespace AssessmentNet.ViewModels.Admin
 {
     public class SimpleAnswerViewModel
     {

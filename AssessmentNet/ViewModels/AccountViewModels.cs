@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AssessmentNet.Models
+namespace AssessmentNet.ViewModels
 {
     public class ExternalLoginConfirmationViewModel
     {

@@ -11,7 +11,10 @@ using System.Web.Mvc;
 using System.Web.Security;
 using AssessmentNet.Framework;
 using AssessmentNet.Models;
+using AssessmentNet.ViewModels;
+using AssessmentNet.ViewModels.Admin;
 using Microsoft.AspNet.Identity;
+using WebGrease.Css.Extensions;
 
 namespace AssessmentNet.Controllers
 {
@@ -126,7 +129,22 @@ namespace AssessmentNet.Controllers
 
             int tid = q.Test.Id;
 
+            foreach (var response in db.Responses.Where(x => x.Question.Id == id))
+            {
+                if (response.TestRun.HasStarted)
+                {
+                    return new ContentResult(){Content = "Error: Cannot delete because a user started this test"};
+                }
+            }
+
+            var set = db.Responses.Where(x => x.Question.Id == id).ToArray();
+            foreach (var item in set)
+            {
+                db.Responses.Remove(item);
+            }
+
             db.Questions.Remove(q);
+
 
             db.SaveChanges();
 

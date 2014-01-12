@@ -13,10 +13,13 @@ namespace AssessmentNet.Models
 
         public DateTime Created { get; set; }
         public DateTime Started { get; set; }
+        public bool HasStarted { get; set; }
 
         public DateTime Expires { get; set; }
 
         public virtual ICollection<QuestionResponse> Responses { get; set; } 
+
+        public QuestionResponse
 
         public TimeSpan TimeToLive()
         {

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
-namespace AssessmentNet.Models
+namespace AssessmentNet.ViewModels.Admin
 {
     public class MultiChoiceQuestionViewModel
     {

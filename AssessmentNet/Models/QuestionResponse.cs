@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace AssessmentNet.Models
 {
@@ -49,16 +48,5 @@ namespace AssessmentNet.Models
         {
             return Question.IsCorrect(this);
         }
-    }
-
-    public class QuestionResponseAnswer
-    {
-        public int Id { get; set; }
-
-        [Required]
-        public virtual Answer Answer { get; set; }
-
-        [Required]
-        public virtual QuestionResponse Response { get; set; }
     }
 }

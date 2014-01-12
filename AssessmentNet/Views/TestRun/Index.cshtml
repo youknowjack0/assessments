@@ -1,0 +1,13 @@
+﻿@model AssessmentNet.Models.TestRun
+
+@{
+    ViewBag.Title = Model.Test.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Test @Model.Test.Name for @Model.Testee.UserName</h2>
+
+@foreach (var q in Model.Responses)
+{
+    
+}
