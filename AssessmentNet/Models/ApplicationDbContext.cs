@@ -15,6 +15,5 @@ namespace AssessmentNet.Models
         public virtual IDbSet<QuestionResponse> Responses { get; set; }
         public virtual IDbSet<Test> Tests { get; set; }
         public virtual IDbSet<TestRun> TestRun { get; set; }
-        public virtual IDbSet<TestVersion> TestVersions { get; set; }
     }
 }

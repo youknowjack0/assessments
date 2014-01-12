@@ -1,0 +1,87 @@
+﻿@using AssessmentNet.Models
+@model AssessmentNet.Models.MultiChoiceQuestionViewModel
+
+@{
+    ViewBag.Title = "Add Question";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create question</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Test</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.QuestionHtml, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.QuestionHtml)
+                @Html.ValidationMessageFor(model => model.QuestionHtml)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AllowedTimeInMinutes, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AllowedTimeInMinutes)
+                @Html.ValidationMessageFor(model => model.AllowedTimeInMinutes)
+            </div>
+        </div>
+        
+        
+        <a id="addAnotherAnswer" href="javascript:void(0)">Add Answer...</a>
+        <table id="answers" class="table table-bordered table-striped">
+            <colgroup>
+                <col span="1" style="width: 100px;" />
+                <col span="1" />
+                <col span="1" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>IsCorrect</th>
+                    <th>Html</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Answers != null)
+                {
+                    foreach (SimpleAnswerViewModel a in Model.Answers)
+                    {
+                        Html.RenderPartial("_MultiChoiceAnswerRow", a);
+                    }
+                }
+            </tbody>
+        </table>
+        
+        @Html.HiddenFor(x => x.TestId)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create Question" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        jQuery("#addAnotherAnswer").click(function () {
+            jQuery.get('/Tests/AddAnotherAnswer', function (template) {
+                jQuery("#answers").append(template);
+            });
+        });
+    </script>
+
+}

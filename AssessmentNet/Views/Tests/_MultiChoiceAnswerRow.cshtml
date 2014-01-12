@@ -1,0 +1,17 @@
+﻿@model AssessmentNet.Models.SimpleAnswerViewModel
+<tr>
+    @using (Html.BeginCollectionItem("Answers"))
+    {
+        <td>
+            @Html.EditorFor(model => model.IsCorrect)
+            @Html.ValidationMessageFor(model => model.IsCorrect)
+        </td>
+        <td>
+            @Html.TextAreaFor(model => model.AnswerHtml)
+            @Html.ValidationMessageFor(model => model.AnswerHtml)
+        </td>
+        <td>
+            <a href="javascript:void(0)" onclick="jQuery(this).parent().parent().remove();">Delete</a>
+        </td>
+    }
+</tr>

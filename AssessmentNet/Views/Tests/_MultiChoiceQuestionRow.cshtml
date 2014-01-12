@@ -1,0 +1,39 @@
+﻿@model AssessmentNet.Models.MultiChoiceQuestion
+<tr>
+    <td>
+        @string.Format("{0}:{1:00}",Model.AllowedTime.Minutes, Model.AllowedTime.Seconds%60)
+    </td>
+    <td>
+        @Model.QuestionHtml
+    </td>
+    <td>
+        @Html.ActionLink("Delete", "DeleteQuestion", new {id = Model.Id})
+        |
+        <a href="">Edit</a>
+    </td>
+</tr>
+<tr>
+    <td colspan="3">
+        <table>
+            @if (Model.Answers != null)
+            {
+                foreach (var answer in Model.Answers)
+                {
+                    <tr>
+                        <td>
+                            @if (answer.IsCorrect)
+                            {
+                                <span>Correct</span>
+                            }
+                            else
+                            {
+                                <span>Wrong</span>
+                            }
+                        </td>
+                        <td>@answer.AnswerHtml</td>
+                    </tr>
+                }
+            }
+        </table>
+    </td>
+</tr>
