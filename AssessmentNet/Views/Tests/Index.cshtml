@@ -1,12 +1,16 @@
 ﻿@using AssessmentNet.Models
-@model IEnumerable<AssessmentNet.Models.Test>
+@model IEnumerable<Test>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Tests</h2>
+
+<p>
+    @ViewBag.Message
+</p>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -37,7 +41,7 @@
             @Html.DisplayFor(modelItem => item.Created)
         </td>
         <td>
-            Clone | @Html.ActionLink("Edit", "EditQuestions", new {id = item.Id}) | Assign to user | See all respondents
+            Clone | @Html.ActionLink("Edit", "EditQuestions", new {id = item.Id}) | @Html.ActionLink("Assign", "TestAssignment", new { id = item.Id }) | See all respondents
         </td>
     </tr>
 }

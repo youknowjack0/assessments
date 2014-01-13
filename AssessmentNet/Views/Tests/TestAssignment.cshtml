@@ -1,0 +1,41 @@
+﻿@model AssessmentNet.ViewModels.Admin.AssignUserToTest
+
+@{
+    ViewBag.Title = "Assign to user";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Assign test @Model.Test.Name to user</h2>
+
+
+@using (Html.BeginForm("AssignTest", "Tests"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Test</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserEmail, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserEmail)
+                @Html.ValidationMessageFor(model => model.UserEmail)
+            </div>
+        </div>
+        
+        @Html.HiddenFor(model => model.Test)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

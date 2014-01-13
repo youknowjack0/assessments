@@ -175,7 +175,12 @@
     <Compile Include="Migrations\201401121058154_alpha1.Designer.cs">
       <DependentUpon>201401121058154_alpha1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201401131430480_alpha2.cs" />
+    <Compile Include="Migrations\201401131430480_alpha2.Designer.cs">
+      <DependentUpon>201401131430480_alpha2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ViewModels\Admin\AssignUserToTest.cs" />
     <Compile Include="ViewModels\TestRun\TestRunResponse.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -240,6 +245,7 @@
     <Content Include="Views\Tests\EditQuestions.cshtml" />
     <Content Include="Views\Tests\_MultiChoiceQuestionRow.cshtml" />
     <Content Include="Views\TestRun\Index.cshtml" />
+    <Content Include="Views\Tests\TestAssignment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -253,6 +259,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201401121058154_alpha1.resx">
       <DependentUpon>201401121058154_alpha1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201401131430480_alpha2.resx">
+      <DependentUpon>201401131430480_alpha2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

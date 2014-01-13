@@ -30,7 +30,7 @@ namespace AssessmentNet.Migrations
 
         private void CreateUser(UserManager<IdentityUser> userManager, string name, string role)
         {
-            var x = userManager.Create(new ApplicationUser(name), "changeme");
+            IdentityResult x = userManager.Create(new ApplicationUser(name), "changeme");
             var u = userManager.FindByName(name);
             userManager.AddToRole(u.Id, role);
         }

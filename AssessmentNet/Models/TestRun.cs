@@ -19,8 +19,6 @@ namespace AssessmentNet.Models
 
         public virtual ICollection<QuestionResponse> Responses { get; set; } 
 
-        public QuestionResponse
-
         public TimeSpan TimeToLive()
         {
             TimeSpan ttl1 = Expires - DateTime.UtcNow;

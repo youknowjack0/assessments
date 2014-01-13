@@ -111,17 +111,17 @@ namespace AssessmentNet.Controllers
 
         public ActionResult AnswerQuestion(int testrun, int question, TestRunResponseViewModel answer)
         {
-            
+            throw new NotImplementedException();
         }
 
         public ActionResult EnterQuestion(int testrun, int question)
         {
-            
+            throw new NotImplementedException();
         }
 
         public ActionResult ExitQuestion(int testrun, int question)
         {
-            
+            throw new NotImplementedException();
         }
 
     }
