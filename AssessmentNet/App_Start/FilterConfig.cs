@@ -8,8 +8,8 @@ namespace AssessmentNet
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            var handler = new MyErrorHandler();
-            filters.Add(handler);
+            //var handler = new MyErrorHandler();
+            filters.Add(new HandleErrorAttribute());
         }
     }
 

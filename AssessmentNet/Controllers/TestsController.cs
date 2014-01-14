@@ -79,6 +79,7 @@ namespace AssessmentNet.Controllers
 
         [ValidateAntiForgeryToken]
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult AddQuestion(MultiChoiceQuestionViewModel q )
         {
             if (ModelState.IsValid)

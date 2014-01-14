@@ -8,7 +8,7 @@
 <h2>Question for test: @Model.TestRun.Test.Name</h2>
 <hr />
 
-<p>@Model.QuestionResponse.Question.QuestionHtml</p>
+<p>@Html.Raw(Model.QuestionResponse.Question.QuestionHtml)</p>
 
 @using (Html.BeginForm("AnswerQuestion","TestRun", FormMethod.Post))
 {

@@ -4,7 +4,7 @@
         @string.Format("{0}:{1:00}",Model.AllowedTime.Minutes, Model.AllowedTime.Seconds%60)
     </td>
     <td>
-        @Model.QuestionHtml
+        @Html.Raw(Model.QuestionHtml)
     </td>
     <td>
         @Html.ActionLink("Delete", "DeleteQuestion", new {id = Model.Id})
@@ -30,7 +30,7 @@
                                 <span>Wrong</span>
                             }
                         </td>
-                        <td>@answer.AnswerHtml</td>
+                        <td>@Html.Raw(@answer.AnswerHtml)</td>
                     </tr>
                 }
             }

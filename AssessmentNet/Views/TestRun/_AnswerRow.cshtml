@@ -8,7 +8,7 @@
             @Html.HiddenFor(model => model.AnswerId)
         </td>
         <td>
-            @Model.AnswerHtml
+            @Html.Raw(Model.AnswerHtml)
             
         </td>        
     }
