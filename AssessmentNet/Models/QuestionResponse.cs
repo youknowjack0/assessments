@@ -6,37 +6,35 @@ namespace AssessmentNet.Models
     public class QuestionResponse
     {
         public int Id { get; set; }
-        public TestRun TestRun { get; set; }
-        public Question Question { get; set; }
+        public virtual TestRun TestRun { get; set; }
+        public virtual Question Question { get; set; }
         public virtual ICollection<QuestionResponseAnswer> Answers { get; set; }
 
-        public bool HasStarted { get; set; }
-        public DateTime Started { get; set; }
+        public DateTime? Started { get; set; }
 
-        public bool HasFinished { get; set; }
-        public DateTime Finished { get; set; }
+        public DateTime? Finished { get; set; }
 
         public bool CanAnswer()
         {
-            return !HasStarted || (!HasFinished && GetRemaining() > new TimeSpan(0));
+            return Started==null || (Finished==null && GetRemaining() > TimeSpan.Zero);
         }
 
         public TimeSpan GetRemaining()
         {
             TimeSpan ts;
-            if (!HasStarted)
+            if (Started == null)
                 ts = Question.AllowedTime;
-            else if (HasFinished)
+            else if (Finished != null)
                 ts = new TimeSpan(0);
             else 
-                ts = Question.AllowedTime - (DateTime.UtcNow - Started);
+                ts = Question.AllowedTime - (DateTime.UtcNow - Started.Value);
 
             var testtotal = TestRun.TimeToLive();
 
             if (ts < testtotal)
-                return testtotal;
-            else
                 return ts;
+            else
+                return testtotal;
         }
 
         public int GetScore()

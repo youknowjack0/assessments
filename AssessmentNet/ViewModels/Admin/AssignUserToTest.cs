@@ -9,8 +9,21 @@ namespace AssessmentNet.ViewModels.Admin
 {
     public class AssignUserToTest
     {
+        private Test _test;
+
         [Required]
         public string UserEmail { get; set; }
-        public Test Test { get; set; }
+
+        public Test Test
+        {
+            get { return _test; }
+            set
+            {
+                _test = value;
+                TestId = _test.Id;
+            }
+        }
+
+        public int TestId { get; set; }
     }
 }

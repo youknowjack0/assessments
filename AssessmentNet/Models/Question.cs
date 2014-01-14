@@ -7,6 +7,7 @@ namespace AssessmentNet.Models
     public abstract class Question
     {
         private int _weight = 1;
+        private TimeSpan _allowedTime = TimeSpan.FromMinutes(3);
 
         public int Id { get; set; }
 
@@ -26,6 +27,10 @@ namespace AssessmentNet.Models
 
         public abstract bool IsCorrect(QuestionResponse response);
 
-        public TimeSpan AllowedTime { get; set; }
+        public TimeSpan AllowedTime
+        {
+            get { return _allowedTime; }
+            set { _allowedTime = value; }
+        }
     }
 }

@@ -41,7 +41,7 @@
             @Html.DisplayFor(modelItem => item.Created)
         </td>
         <td>
-            Clone | @Html.ActionLink("Edit", "EditQuestions", new {id = item.Id}) | @Html.ActionLink("Assign", "TestAssignment", new { id = item.Id }) | See all respondents
+            Clone | @Html.ActionLink("Edit", "EditQuestions", new {id = item.Id}) | @Html.ActionLink("Assign", "TestAssignment", new { id = item.Id }) | @Html.ActionLink("Results", "Results", new {id = item.Id})
         </td>
     </tr>
 }

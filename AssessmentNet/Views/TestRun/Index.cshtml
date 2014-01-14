@@ -7,7 +7,51 @@
 
 <h2>Test @Model.Test.Name for @Model.Testee.UserName</h2>
 
-@foreach (var q in Model.Responses)
+@if (ViewBag.IsComplete??false)
 {
-    
+    <p>This run is <strong>complete</strong>. Please log off (top right) or @Html.ActionLink("take another test", "Index", "Home")</p>
 }
+
+<h3>Questions:</h3>
+
+<table class="table-bordered table table-striped">
+    <colgroup>
+        <col style="width: 50px"/>
+        <col  />
+    </colgroup>
+    <tr>
+        @{ int i = 1; }
+        @foreach (var q in Model.Responses)
+        {
+            <td>#@i</td>
+            <td>
+                @if (q.Finished == null)
+                {
+                    
+                    if (q.Started != null)
+                    {
+                        if (q.CanAnswer())
+                        {
+                            <span>In Progress: @string.Format("{0}:{1:00}", q.GetRemaining().Minutes, q.GetRemaining().Seconds%60) remaining</span>
+                        }
+                        else
+                        {
+                            <span>Timed out</span>
+                        }
+                    }
+                    
+                    if (q.CanAnswer())
+                    {
+                        <span>@Html.ActionLink("Answer now...", "EnterQuestion", new{ testrun = Model.Id, question = q.Id })</span>
+                    }
+                }
+                else if (q.Started != null && q.Finished != null)
+                {
+                    <span>Answered</span>
+                }
+
+                @{ i++; }
+            </td>
+        }
+    </tr>
+</table>

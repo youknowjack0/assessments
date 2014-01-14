@@ -1,0 +1,77 @@
+﻿@model AssessmentNet.ViewModels.TestRunViewModels.TestRunResponseViewModel
+@{
+    ViewBag.Title = "Assessment.Net Question";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var seconds = (int)(Model.Remaining.TotalSeconds);
+}
+
+<h2>Question for test: @Model.TestRun.Test.Name</h2>
+<hr />
+
+<p>@Model.QuestionResponse.Question.QuestionHtml</p>
+
+@using (Html.BeginForm("AnswerQuestion","TestRun", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <p>Please select all applicable answers:</p>
+        @Html.ValidationSummary(true)
+
+        <table class="table table-striped table-bordered">
+            <colgroup>
+                <col style="width: 50px"/>
+                <col />
+            </colgroup>
+            
+            @if (Model.Answers != null)
+            {
+                foreach (var item in Model.Answers)
+                {
+                    Html.RenderPartial("_AnswerRow", item);
+                }
+            }
+        </table>              
+        <span>Time Remaining: <span id="timer" style="color: red;"></span></span>
+        @Html.HiddenFor(x => x.TestRunId)
+        @Html.HiddenFor(x => x.QuestionResponseId)
+
+        <div class="form-group" style="padding: 15px;">
+                <input type="submit" value="Submit and Next &gt;" class="btn btn-default" />
+        </div>
+        <p style="color:gray;"><i>Leaving this page will not suspend the timer. Your answer is not submitted until after pressing the Submit and Next button.</i></p>
+    </div>
+}
+
+@section scripts
+{
+    <script language="javascript">
+        //http://stackoverflow.com/questions/1191865/code-for-a-simple-javascript-countdown-timer
+        var count = @seconds;
+        var counter = setInterval(timer, 1000);
+        function timer() {
+            count = count - 1;
+            if (count <= 0) {
+                clearInterval(counter);
+                jQuery("#timer").text("00:00:00");
+                return;
+            }
+
+            jQuery("#timer").text(hms(count));
+        }
+
+        //http://stackoverflow.com/questions/6312993/javascript-seconds-to-time-with-format-hhmmss
+        function hms(sec_num) {
+            var hours   = Math.floor(sec_num / 3600);
+            var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+            var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+            if (hours   < 10) {hours   = "0"+hours;}
+            if (minutes < 10) {minutes = "0"+minutes;}
+            if (seconds < 10) {seconds = "0"+seconds;}
+            var time    = hours+':'+minutes+':'+seconds;
+            return time;
+        }
+    </script>
+}

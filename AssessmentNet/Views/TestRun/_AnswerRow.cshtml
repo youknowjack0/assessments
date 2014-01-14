@@ -1,0 +1,15 @@
+﻿@model AssessmentNet.ViewModels.TestRunViewModels.AnswerSelectionViewModel
+<tr>
+    @using (Html.BeginCollectionItem("Answers"))
+    {
+        <td>
+            @Html.EditorFor(model => model.Selected)
+            @Html.ValidationMessageFor(model => model.Selected)
+            @Html.HiddenFor(model => model.AnswerId)
+        </td>
+        <td>
+            @Model.AnswerHtml
+            
+        </td>        
+    }
+</tr>

@@ -1,0 +1,66 @@
+﻿@using AssessmentNet.Models
+@model IEnumerable<IGrouping<AssessmentNet.Models.TestRun,AssessmentNet.Models.QuestionResponse>>
+
+@{
+    ViewBag.Title = "Results";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Results</h2>
+
+<table class="table-bordered table-striped table">
+    @if(@Model.Any()) {
+        <tr>
+            <th></th>
+            @{ int i = 0; }
+            @foreach (var item in Model.First())
+            {
+                <th>#@(++i)</th>
+            }
+        </tr>
+
+    }
+    @foreach (IGrouping<TestRun, QuestionResponse> test in Model)
+    {
+        <tr>
+            <td>@test.Key.Testee.UserName</td>
+            @foreach (var item in test)
+            {
+                if (item.Finished!=null && item.IsCorrect())
+                {
+                    <td><div style="color: green; font-weight: bold;">Y</div></td>
+                }
+                else if (item.Finished!=null)
+                {
+                    <td><div style="color: red; font-weight: bold;">N</div></td>
+                }
+                else if (item.Started != null)
+                {
+                    <td><div style="color: red; font-weight: bold;">T/o</div></td>
+                }
+                else if (item.Started == null)
+                {
+                    <td><div style="color: gray; font-weight: bold;">-</div></td>
+                }
+            }
+        </tr>
+    }  
+</table>
+
+<h3>Questions</h3>
+
+<table class="table table-bordered table-striped">
+    @if (@Model.Any())
+    {       
+        int i = 0;
+        foreach (var item in Model.First())
+        {
+            <tr>
+                <th>#@(++i)</th>
+                <td>@item.Question.QuestionHtml</td>
+            </tr>
+        }
+    }
+</table>
+
+

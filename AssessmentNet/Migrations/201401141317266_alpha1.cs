@@ -48,24 +48,6 @@ namespace AssessmentNet.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.QuestionResponses",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        HasStarted = c.Boolean(nullable: false),
-                        Started = c.DateTime(nullable: false),
-                        HasFinished = c.Boolean(nullable: false),
-                        Finished = c.DateTime(nullable: false),
-                        Question_Id = c.Int(),
-                        TestRun_Id = c.Int(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Questions", t => t.Question_Id)
-                .ForeignKey("dbo.TestRuns", t => t.TestRun_Id)
-                .Index(t => t.Question_Id)
-                .Index(t => t.TestRun_Id);
-            
-            CreateTable(
                 "dbo.QuestionResponseAnswers",
                 c => new
                     {
@@ -80,12 +62,29 @@ namespace AssessmentNet.Migrations
                 .Index(t => t.Response_Id);
             
             CreateTable(
+                "dbo.QuestionResponses",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Started = c.DateTime(),
+                        Finished = c.DateTime(),
+                        Question_Id = c.Int(),
+                        TestRun_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Questions", t => t.Question_Id)
+                .ForeignKey("dbo.TestRuns", t => t.TestRun_Id)
+                .Index(t => t.Question_Id)
+                .Index(t => t.TestRun_Id);
+            
+            CreateTable(
                 "dbo.TestRuns",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Created = c.DateTime(nullable: false),
-                        Started = c.DateTime(nullable: false),
+                        Created = c.DateTime(),
+                        Started = c.DateTime(),
+                        HasStarted = c.Boolean(nullable: false),
                         Expires = c.DateTime(nullable: false),
                         Test_Id = c.Int(),
                         Testee_Id = c.String(maxLength: 128),
@@ -159,6 +158,7 @@ namespace AssessmentNet.Migrations
         
         public override void Down()
         {
+            DropForeignKey("dbo.QuestionResponseAnswers", "Response_Id", "dbo.QuestionResponses");
             DropForeignKey("dbo.TestRuns", "Testee_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "User_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
@@ -167,10 +167,10 @@ namespace AssessmentNet.Migrations
             DropForeignKey("dbo.TestRuns", "Test_Id", "dbo.Tests");
             DropForeignKey("dbo.QuestionResponses", "TestRun_Id", "dbo.TestRuns");
             DropForeignKey("dbo.QuestionResponses", "Question_Id", "dbo.Questions");
-            DropForeignKey("dbo.QuestionResponseAnswers", "Response_Id", "dbo.QuestionResponses");
             DropForeignKey("dbo.QuestionResponseAnswers", "Answer_Id", "dbo.Answers");
             DropForeignKey("dbo.Questions", "Test_Id", "dbo.Tests");
             DropForeignKey("dbo.Answers", "Question_Id", "dbo.Questions");
+            DropIndex("dbo.QuestionResponseAnswers", new[] { "Response_Id" });
             DropIndex("dbo.TestRuns", new[] { "Testee_Id" });
             DropIndex("dbo.AspNetUserClaims", new[] { "User_Id" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
@@ -179,7 +179,6 @@ namespace AssessmentNet.Migrations
             DropIndex("dbo.TestRuns", new[] { "Test_Id" });
             DropIndex("dbo.QuestionResponses", new[] { "TestRun_Id" });
             DropIndex("dbo.QuestionResponses", new[] { "Question_Id" });
-            DropIndex("dbo.QuestionResponseAnswers", new[] { "Response_Id" });
             DropIndex("dbo.QuestionResponseAnswers", new[] { "Answer_Id" });
             DropIndex("dbo.Questions", new[] { "Test_Id" });
             DropIndex("dbo.Answers", new[] { "Question_Id" });
@@ -189,8 +188,8 @@ namespace AssessmentNet.Migrations
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.TestRuns");
-            DropTable("dbo.QuestionResponseAnswers");
             DropTable("dbo.QuestionResponses");
+            DropTable("dbo.QuestionResponseAnswers");
             DropTable("dbo.Tests");
             DropTable("dbo.Questions");
             DropTable("dbo.Answers");

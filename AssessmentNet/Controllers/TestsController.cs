@@ -156,7 +156,7 @@ namespace AssessmentNet.Controllers
         public ActionResult TestAssignment(int id)
         {
             Test test = db.Tests.Single(x => x.Id == id);
-            var y = new AssignUserToTest() {Test = test, UserEmail = null};
+            var y = new AssignUserToTest() {Test = test,UserEmail = null};
             return View(y);
         }
 
@@ -175,7 +175,7 @@ namespace AssessmentNet.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AssignTest([Bind(Include = "UserEmail, Test")] AssignUserToTest model)
+        public ActionResult AssignTest([Bind(Include = "UserEmail, TestId")] AssignUserToTest model)
         {
             var email = model.UserEmail.ToLower().Trim();
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
@@ -189,7 +189,7 @@ namespace AssessmentNet.Controllers
                 acct = userManager.FindByName(email);
             }
 
-            var test = db.Tests.Single(x => x.Id == model.Test.Id);
+            var test = db.Tests.Single(x => x.Id == model.TestId);
 
             if (db.TestRun.Any(x => x.Test.Id == test.Id && x.Testee.Id == acct.Id))
             {
@@ -212,8 +212,6 @@ namespace AssessmentNet.Controllers
             {
                 db.Responses.Add(new QuestionResponse()
                 {
-                    HasStarted = false,
-                    HasFinished = false,
                     Question = item,
                     TestRun = run,
                 });
@@ -223,6 +221,14 @@ namespace AssessmentNet.Controllers
 
             ViewBag.Message = string.Format("Assigned user {0} to test, with password: \"{1}\"", acct.UserName, password);
             return View("Index", db.Tests.ToList());
+        }
+
+        //test id
+        public ActionResult Results(int id)
+        {
+            var results = db.Responses.Where(x => x.TestRun.Test.Id == id).GroupBy(x => x.TestRun).ToArray();
+
+            return View(results);
         }
     }
 }

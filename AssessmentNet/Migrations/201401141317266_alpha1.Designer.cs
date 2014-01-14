@@ -7,13 +7,13 @@ namespace AssessmentNet.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.0.0-20911")]
-    public sealed partial class alpha2 : IMigrationMetadata
+    public sealed partial class alpha1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(alpha2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(alpha1));
         
         string IMigrationMetadata.Id
         {
-            get { return "201401131430480_alpha2"; }
+            get { return "201401141317266_alpha1"; }
         }
         
         string IMigrationMetadata.Source

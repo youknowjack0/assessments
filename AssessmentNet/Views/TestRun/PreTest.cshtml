@@ -1,0 +1,13 @@
+﻿@using System.Web.UI.WebControls
+@model AssessmentNet.Models.TestRun
+
+@{
+    ViewBag.Title = "Test " + @Model.Test.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>Pre-test message</p>
+
+<p>@Html.ActionLink("Begin Test", "BeginTestRun", new{testrun = Model.Id})</p>

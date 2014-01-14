@@ -12,7 +12,7 @@ namespace AssessmentNet.Models
         [Required]
         public string Creator { get; set; }
         [Required]
-        public DateTime Created { get; set; }
+        public DateTime? Created { get; set; }
 
         public virtual ICollection<Question> Questions { get; set; }
 

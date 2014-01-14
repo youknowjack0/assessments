@@ -1,7 +1,24 @@
-﻿@{
-    ViewBag.Title = "Assessment.Net";
+﻿@model IEnumerable<AssessmentNet.Models.TestRun>
+
+@{
+    ViewBag.Title = "Assessment.Net - Available Tests";
 }
 
-<p>
-    Please use the link provided by Alastri staff.
-</p>
+<h2>Available Tests</h2>
+
+@if (!Model.Any())
+{
+    <span>No active tests</span>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(@item.Test.Name,  "PreTest",  "TestRun",  new{testrun=item.Id}, null)</td>
+                <td>Expires in @string.Format("{2}:{0:00}:{1:00}",item.TimeToLive().Minutes%60, item.TimeToLive().Seconds%60, item.TimeToLive().Hours)</td>
+            </tr>
+        }
+    </table>
+}
