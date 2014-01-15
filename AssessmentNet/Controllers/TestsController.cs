@@ -171,7 +171,7 @@ namespace AssessmentNet.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AssignTest([Bind(Include = "UserEmail, TestId")] AssignUserToTest model)
+        public ActionResult AssignTest([Bind(Include = "UserEmail, TestId, ExpiryTimeInHours")] AssignUserToTest model)
         {
             var email = model.UserEmail.ToLower().Trim();
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
