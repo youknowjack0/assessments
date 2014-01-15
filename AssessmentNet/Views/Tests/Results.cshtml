@@ -27,13 +27,16 @@
             <td>@test.Key.Testee.UserName</td>
             @foreach (var item in test)
             {
+                TimeSpan time;
                 if (item.Finished!=null && item.IsCorrect())
                 {
-                    <td><div style="color: green; font-weight: bold;">Y</div></td>
+                    time = item.Finished.Value - item.Started.Value;
+                    <td><div style="color: green; font-weight: bold;">@string.Format("{0:00}:{1:00}",(int)time.TotalMinutes, time.Seconds)</div></td>
                 }
                 else if (item.Finished!=null)
                 {
-                    <td><div style="color: red; font-weight: bold;">N</div></td>
+                    time = item.Finished.Value - item.Started.Value;
+                    <td><div style="color: red; font-weight: bold;">N @string.Format("{0:00}:{1:00}", (int)time.TotalMinutes, time.Seconds)</div></td>
                 }
                 else if (item.Started != null)
                 {
