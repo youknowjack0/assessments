@@ -198,7 +198,7 @@ namespace AssessmentNet.Controllers
             TestRun run = new TestRun()
             {
                 Created = DateTime.UtcNow,
-                Expires = DateTime.UtcNow + TimeSpan.FromHours(test.MaxDurationInHours),
+                Expires = DateTime.UtcNow + TimeSpan.FromHours(model.ExpiryTimeInHours),
                 HasStarted = false,
                 Test = test,
                 Testee = acct

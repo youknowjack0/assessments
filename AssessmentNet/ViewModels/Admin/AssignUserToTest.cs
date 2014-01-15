@@ -10,6 +10,7 @@ namespace AssessmentNet.ViewModels.Admin
     public class AssignUserToTest
     {
         private Test _test;
+        private double _expiryTimeInHours = 48;
 
         [Required]
         public string UserEmail { get; set; }
@@ -22,6 +23,12 @@ namespace AssessmentNet.ViewModels.Admin
                 _test = value;
                 TestId = _test.Id;
             }
+        }
+
+        public double ExpiryTimeInHours
+        {
+            get { return _expiryTimeInHours; }
+            set { _expiryTimeInHours = value; }
         }
 
         public int TestId { get; set; }
