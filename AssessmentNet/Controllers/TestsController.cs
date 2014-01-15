@@ -82,33 +82,28 @@ namespace AssessmentNet.Controllers
         [ValidateInput(false)]
         public ActionResult AddQuestion(MultiChoiceQuestionViewModel q )
         {
-            if (ModelState.IsValid)
-            {
-                var test = db.Tests.Single(x => x.Id == q.TestId);
-                var question = new MultiChoiceQuestion();
-                question.AllowedTime = TimeSpan.FromMinutes(q.AllowedTimeInMinutes);
-                question.QuestionHtml = q.QuestionHtml;
-                question.Weight = q.Weight;
-                question.Test = test;
-                db.Questions.Add(question);
+            var test = db.Tests.Single(x => x.Id == q.TestId);
+            var question = new MultiChoiceQuestion();
+            question.AllowedTime = TimeSpan.FromMinutes(q.AllowedTimeInMinutes);
+            question.QuestionHtml = q.QuestionHtml;
+            question.Weight = q.Weight;
+            question.Test = test;
+            db.Questions.Add(question);
 
-                if(q.Answers != null)
-                    foreach (var answer in q.Answers)
-                    {
-                        var a = new MultiChoiceAnswer();
-                        a.IsCorrect = answer.IsCorrect;
-                        a.Question = question;
-                        a.AnswerHtml = answer.AnswerHtml;
-                        db.Answers.Add(a);
-                    }
+            if(q.Answers != null)
+                foreach (var answer in q.Answers)
+                {
+                    var a = new MultiChoiceAnswer();
+                    a.IsCorrect = answer.IsCorrect;
+                    a.Question = question;
+                    a.AnswerHtml = answer.AnswerHtml;
+                    db.Answers.Add(a);
+                }
 
                 
-                db.SaveChanges();
+            db.SaveChanges();
 
-                return  RedirectToAction("EditQuestions", new {id = q.TestId});
-            }
-
-            return View(q);
+            return  RedirectToAction("EditQuestions", new {id = q.TestId});
         }
 
         public ActionResult AddAnotherAnswer()
