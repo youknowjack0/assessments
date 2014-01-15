@@ -184,6 +184,7 @@ namespace AssessmentNet.Controllers
                 password = CreateRandomPassword(16);
                 var x = userManager.Create(new ApplicationUser(email), password);
                 acct = userManager.FindByName(email);
+                userManager.AddToRole(acct.Id, "testee");
             }
 
             var test = db.Tests.Single(x => x.Id == model.TestId);
