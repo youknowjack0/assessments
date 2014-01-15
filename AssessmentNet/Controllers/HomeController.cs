@@ -20,10 +20,12 @@ namespace AssessmentNet.Controllers
         {
             db = new ApplicationDbContext();
             _userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+            _userManager.UserValidator = new UserValidator<ApplicationUser>(_userManager) { AllowOnlyAlphanumericUserNames = false };
         }
 
         public ActionResult Index()
         {
+
             ApplicationUser user = _userManager.FindById(User.Identity.GetUserId());
 
             List<TestRun> tests = db.TestRun.Where(x => x.Testee.Id == user.Id && x.Expires > DateTime.UtcNow).ToList();

@@ -175,6 +175,7 @@ namespace AssessmentNet.Controllers
         {
             var email = model.UserEmail.ToLower().Trim();
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+            userManager.UserValidator = new UserValidator<ApplicationUser>(userManager) {AllowOnlyAlphanumericUserNames = false};
             ApplicationUser acct = userManager.FindByName(email);
 
             string password = "<user already has an account>";
