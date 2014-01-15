@@ -7,6 +7,8 @@
 
 <h2>Question for test: @Model.TestRun.Test.Name</h2>
 <hr />
+<span>Time Remaining for this question: <span id="timer" style="color: red;"></span></span>
+<hr />
 
 <p>@Html.Raw(Model.QuestionResponse.Question.QuestionHtml)</p>
 
@@ -33,7 +35,7 @@
                 }
             }
         </table>              
-        <span>Time Remaining: <span id="timer" style="color: red;"></span></span>
+        <span>Time Remaining for this question: <span id="timer" style="color: red;"></span></span>
         @Html.HiddenFor(x => x.TestRunId)
         @Html.HiddenFor(x => x.QuestionResponseId)
 
@@ -58,7 +60,10 @@
                 return;
             }
 
-            jQuery("#timer").text(hms(count));
+            var tx = hms(count);
+
+            jQuery("#timer").text(tx);
+            jQuery("#timer2").text(tx);
         }
 
         //http://stackoverflow.com/questions/6312993/javascript-seconds-to-time-with-format-hhmmss
