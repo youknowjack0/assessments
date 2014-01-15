@@ -4,5 +4,6 @@
     {
         public string AnswerHtml { get; set; }
         public bool IsCorrect { get; set; }
+        public int AnswerId { get; set; }
     }
 }

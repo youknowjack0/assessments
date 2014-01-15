@@ -7,7 +7,7 @@
 
 <h2>Test @Model.Test.Name for @Model.Testee.UserName</h2>
 
-@if (ViewBag.IsComplete??false)
+@if (ViewBag.IsComplete ?? false)
 {
     <p>This run is <strong>complete</strong>. Please log off (top right) or @Html.ActionLink("take another test", "Index", "Home")</p>
 }
@@ -19,15 +19,15 @@
         <col style="width: 50px"/>
         <col  />
     </colgroup>
-    <tr>
-        @{ int i = 1; }
-        @foreach (var q in Model.Responses)
-        {
+    @{ int i = 1; }
+    @foreach (var q in Model.Responses)
+    {
+        <tr>
+
             <td>#@i</td>
             <td>
                 @if (q.Finished == null)
                 {
-                    
                     if (q.Started != null)
                     {
                         if (q.CanAnswer())
@@ -39,10 +39,10 @@
                             <span>Timed out</span>
                         }
                     }
-                    
+
                     if (q.CanAnswer())
                     {
-                        <span>@Html.ActionLink("Answer now...", "EnterQuestion", new{ testrun = Model.Id, question = q.Id })</span>
+                        <span>@Html.ActionLink("Answer now...", "EnterQuestion", new {testrun = Model.Id, question = q.Id})</span>
                     }
                 }
                 else if (q.Started != null && q.Finished != null)
@@ -52,6 +52,7 @@
 
                 @{ i++; }
             </td>
-        }
-    </tr>
+        
+        </tr>
+    }
 </table>

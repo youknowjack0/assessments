@@ -9,7 +9,7 @@
     <td>
         @Html.ActionLink("Delete", "DeleteQuestion", new {id = Model.Id})
         |
-        <a href="">Edit</a>
+        @Html.ActionLink("Edit", "EditQuestion", new { id = Model.Id})
     </td>
 </tr>
 <tr>

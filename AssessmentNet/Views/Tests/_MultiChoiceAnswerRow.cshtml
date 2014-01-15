@@ -9,7 +9,9 @@
         <td>
             @Html.TextAreaFor(model => model.AnswerHtml)
             @Html.ValidationMessageFor(model => model.AnswerHtml)
+            @Html.HiddenFor(model => model.AnswerId);
         </td>
+        
         <td>
             <a href="javascript:void(0)" onclick="jQuery(this).parent().parent().remove();">Delete</a>
         </td>

@@ -8,6 +8,15 @@
 
 <h2>@ViewBag.Title</h2>
 
-<p>Pre-test message</p>
+<h4>Instructions:</h4>
+
+<ul>
+    <li>Please attempt to answer every question, points are not subtracted for incorrect answers</li>
+    <li>Only completely-correct answers can score points. Partially correct answers do not score any points</li>
+    <li>Please submit answers before the time limit expires.</li>
+    <li>If the time limit for a question expires, the test will <b>not</b> advance to the next question automatically. </li>
+    <li>If you encounter an error, please record the error, then attempt to refresh or go back. </li>
+    <li><b>It is important to take this test without external assistance.</b> Test results WILL be verified at in-person interviews.</li>
+</ul>
 
 <p>@Html.ActionLink("Begin Test", "BeginTestRun", new{testrun = Model.Id})</p>

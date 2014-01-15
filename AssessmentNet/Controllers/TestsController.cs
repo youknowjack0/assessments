@@ -231,5 +231,61 @@ namespace AssessmentNet.Controllers
 
             return View(results);
         }
+        
+        public ActionResult EditQuestion(int id)
+        {
+            var question = (MultiChoiceQuestion) db.Questions.Single(x => x.Id == id);
+
+            var vm = new MultiChoiceQuestionViewModel()
+            {
+                AllowedTimeInMinutes = question.AllowedTime.TotalMinutes,
+                Answers = question.Answers.Select(x => new SimpleAnswerViewModel() {AnswerHtml = x.AnswerHtml, AnswerId = x.Id, IsCorrect = x.IsCorrect}),
+                QuestionHtml = question.QuestionHtml,
+                QuestionId = question.Id,
+                TestId = question.Test.Id,
+                Weight = question.Weight
+            };
+
+            return View(vm);
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult EditQuestion(MultiChoiceQuestionViewModel vm)
+        {
+            var question = (MultiChoiceQuestion)db.Questions.Single(x => x.Id == vm.QuestionId);
+
+            question.AllowedTime = TimeSpan.FromMinutes(vm.AllowedTimeInMinutes);
+            question.QuestionHtml = vm.QuestionHtml;
+
+            foreach (var answer in vm.Answers)
+            {
+                var dba = (MultiChoiceAnswer) db.Answers.FirstOrDefault(x => x.Id == answer.AnswerId);
+                if (dba == null)
+                {
+                    db.Answers.Add(new MultiChoiceAnswer() {AnswerHtml = answer.AnswerHtml, IsCorrect = answer.IsCorrect, Question = question});
+                }
+                else
+                {
+                    dba.AnswerHtml = answer.AnswerHtml;
+                    dba.IsCorrect = answer.IsCorrect;
+                    db.Entry(dba).State= EntityState.Modified;
+                }
+            }
+
+            foreach (var answer in db.Answers.OfType<MultiChoiceAnswer>().Where(x => x.Question.Id == question.Id).ToList())
+            {
+                if (!vm.Answers.Any(x => x.AnswerId == answer.Id))
+                {
+                    db.Answers.Remove(answer);
+                }
+            }
+
+            db.SaveChanges();
+
+            return View(vm);
+        }
     }
 }

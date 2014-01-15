@@ -1,5 +1,6 @@
-﻿@using AssessmentNet.Models
-@model IEnumerable<IGrouping<AssessmentNet.Models.TestRun,AssessmentNet.Models.QuestionResponse>>
+﻿@using System.Linq
+@using AssessmentNet.Models
+@model System.Linq.IGrouping<TestRun, QuestionResponse>[]
 
 @{
     ViewBag.Title = "Results";
