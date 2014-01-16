@@ -193,6 +193,7 @@
     <Content Include="Content\images\circle-filled.png" />
     <Content Include="Content\images\circle-unfilled.png" />
     <Content Include="Content\images\littlecross.png" />
+    <Content Include="Content\images\redarrowleft.png" />
     <Content Include="Content\images\smalltick.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

@@ -65,9 +65,13 @@
                                 {
                                     <img src="~/Content/images/smalltick.png" alt="Correct" />
                                 }
-                                else if ((xed && !answer.IsCorrect) || (!xed && answer.IsCorrect))
+                                else if (xed && !answer.IsCorrect)
                                 {
                                     <img src="~/Content/images/littlecross.png" alt="Wrong" />
+                                }
+                                else if (!xed && answer.IsCorrect)
+                                {
+                                    <img src="~/Content/images/redarrowleft.png" alt="Wrong" />
                                 }
                             </td>
                             <td>@Html.Raw(answer.AnswerHtml)</td>
