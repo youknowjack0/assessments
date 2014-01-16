@@ -14,6 +14,7 @@
     <colgroup>
         <col style="width: 30px;" />
         <col style="width: 40px;" />
+        <col style="width: 60px;" />
         <col />
     </colgroup>
     @{ int i = 1;}
@@ -34,12 +35,27 @@
                 }
             </td>
             <td>
+                @if (response.Started != null && response.Finished != null)
+                {
+                    var val = response.Finished.Value - response.Started.Value;
+                    <span>@(string.Format("{0}:{1:00}:{2:00}", (int) val.TotalHours, val.Minutes, val.Seconds))</span>
+                }
+                else if (response.Started != null)
+                {
+                    <span>T/o</span>
+                }
+                else
+                {
+                    <span>-</span>
+                }
+            </td>
+            <td>
                 @Html.Raw(response.Question.QuestionHtml)
             </td>
 
         </tr>
         <tr>
-            <td colspan="3">
+            <td colspan="4">
                 <table class="table table-bordered">
                     <colgroup>
                         <col style="width: 30px;" />
