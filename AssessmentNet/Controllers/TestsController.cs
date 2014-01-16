@@ -284,5 +284,11 @@ namespace AssessmentNet.Controllers
 
             return View(vm);
         }
+
+        public ActionResult ResultsForUser(int testrun)
+        {
+            var run = db.TestRun.Single(x => x.Id == testrun);
+            return View(run);
+        }
     }
 }

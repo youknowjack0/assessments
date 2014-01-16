@@ -33,5 +33,21 @@ namespace AssessmentNet.Models
 
             return ttl1;
         }
+
+        public int GetCorrectCount()
+        {
+            int i = 0;
+            foreach (var item in Responses)
+            {
+                if (item.IsCorrect())
+                    i++;
+            }
+            return i;
+        }
+
+        public int GetTotalCount()
+        {
+            return Responses.Count;
+        }
     }
 }

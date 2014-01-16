@@ -188,6 +188,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\bigcross.png" />
+    <Content Include="Content\images\bigtick.png" />
+    <Content Include="Content\images\circle-filled.png" />
+    <Content Include="Content\images\circle-unfilled.png" />
+    <Content Include="Content\images\littlecross.png" />
+    <Content Include="Content\images\smalltick.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -245,6 +251,7 @@
     <Content Include="Views\Tests\Results.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Tests\EditQuestion.cshtml" />
+    <Content Include="Views\Tests\ResultsForUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -24,7 +24,7 @@
     @foreach (IGrouping<TestRun, QuestionResponse> test in Model)
     {
         <tr>
-            <td>@test.Key.Testee.UserName</td>
+            <td>@Html.ActionLink(test.Key.Testee.UserName, "ResultsForUser", new{testrun = test.Key.Id})</td>
             @foreach (var item in test)
             {
                 TimeSpan time;

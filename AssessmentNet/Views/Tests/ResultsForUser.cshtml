@@ -1,0 +1,82 @@
+﻿@using AssessmentNet.Models
+@model AssessmentNet.Models.TestRun
+
+@{
+    ViewBag.Title = "Detail for test '" + Model.Test.Name + "' user '"+ Model.Testee.UserName + "'";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>Score: <span style="font-size: xx-large">@Model.GetCorrectCount()</span><span style="font-size: large">/@Model.GetTotalCount()</span></div>
+
+<table class="table table-striped table-bordered">
+    <colgroup>
+        <col style="width: 30px;" />
+        <col style="width: 40px;" />
+        <col />
+    </colgroup>
+    @{ int i = 1;}
+    @foreach (QuestionResponse response in Model.Responses)
+    {        
+        <tr>
+            <td>
+                #@i
+            </td>
+            <td>
+                @if (response.IsCorrect())
+                {
+                    <img src="~/Content/images/bigtick.png" alt="Correct" />
+                }
+                else
+                {
+                    <img src="~/Content/images/bigcross.png" alt="Wrong" />
+                }
+            </td>
+            <td>
+                @Html.Raw(response.Question.QuestionHtml)
+            </td>
+
+        </tr>
+        <tr>
+            <td colspan="3">
+                <table class="table table-bordered">
+                    <colgroup>
+                        <col style="width: 30px;" />
+                        <col style="width: 30px;" />
+                        <col />
+                    </colgroup>
+                    @foreach (var answer in ((MultiChoiceQuestion) response.Question).Answers)
+                    {
+                        var xed = response.Answers.Any(x => x.Answer == answer);
+                        <tr>
+                            <td>
+                                @if (xed)
+                                {
+                                    <img src="~/Content/images/circle-filled.png" alt="X" />
+                                }
+                                else
+                                {
+                                    <img src="~/Content/images/circle-unfilled.png" alt="" />
+                                }
+                            </td>
+                            <td>
+                                @if (xed && answer.IsCorrect)
+                                {
+                                    <img src="~/Content/images/smalltick.png" alt="Correct" />
+                                }
+                                else if ((xed && !answer.IsCorrect) || (!xed && answer.IsCorrect))
+                                {
+                                    <img src="~/Content/images/littlecross.png" alt="Wrong" />
+                                }
+                            </td>
+                            <td>@Html.Raw(answer.AnswerHtml)</td>
+
+                        </tr>
+                    }
+                </table>
+            </td>
+        </tr>
+        i++;
+    }
+</table>
